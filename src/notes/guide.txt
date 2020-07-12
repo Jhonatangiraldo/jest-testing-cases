@@ -1,0 +1,13 @@
+Problems we need to tackle when testing:
+
+1. Mock a dependency automatically // src/__tests__/mockImports/tests.js
+2. Mock a dependency with specific behavior // src/__tests__/mockImports/test2.js
+3. Mock destructured imports // src/__tests__/mockImports/test2.js
+4. Mock destructured imports and default imports // src/__tests__/mockImports/test2.js
+5. Mock methods of an instantiated class // src/__tests__/mockImports/tests3.js
+6. Mock methods of an imported class:
+// src/__tests__/mockImports/test4.js
+// src/__tests__/mockImports/test5.js
+7. Mock and verify params on mocked imported classes
+// src/__tests__/mockImports/test6.js
+// src/__tests__/mockImports/tests7.js

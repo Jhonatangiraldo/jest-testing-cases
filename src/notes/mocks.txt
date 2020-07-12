@@ -1,0 +1,49 @@
+// 1. automock
+import banana from '../banana';
+
+jest.mock('../banana');
+
+banana(); // will return 'undefined' because the function is auto-mocked.
+
+// 2. mock + factory
+import moduleName from '../moduleName';
+jest.mock(
+  '../moduleName',
+  // factory function
+  () => {
+    // return is literally the import 'moduleName0
+    return jest.fn(() => 42);
+  }
+);
+
+// This runs the function specified as second argument to `jest.mock`.
+moduleName(); // Will return '42';
+
+// 3. mock + factory + desctructurying
+import moduleName, { foo } from '../moduleName';
+
+jest.mock('../moduleName', () => {
+  return {
+    __esModule: true,
+    default: jest.fn(() => 42),
+    foo: jest.fn(() => 43),
+  };
+});
+
+moduleName(); // Will return 42
+foo(); // Will return 43
+
+// 4. mock methods of an instantiated class
+const util = new Util(...{});
+
+util.getSignedUrl = jest.fn().mockImplementation(() => ({
+  prop1: '1',
+  prop2: '2',
+}));
+
+util.getAssetVersion = jest.fn().mockImplementation(() => ({
+  details: { assetsSuccess: [{ urn: { value: 'mockUrnValue' } }] },
+}));
+util.uploadSmallFile = jest.fn().mockImplementation(() => ({
+  objectId: 'objectIdMock',
+}));
