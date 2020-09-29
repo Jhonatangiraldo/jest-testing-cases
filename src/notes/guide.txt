@@ -11,3 +11,25 @@ Problems we need to tackle when testing:
 7. Mock and verify params on mocked imported classes
 // src/__tests__/mockImports/test6.js
 // src/__tests__/mockImports/tests7.js
+
+
+Problem when native browser APIs
+1. LocalStorage:
+// jest.spyOn(Storage.prototype, 'setItem');
+// Storage.prototype.getItem = jest.fn(() => 'bla');
+// 
+const mockLocalStorage = jest.fn(() => ({ getItem: ... }));
+Object.defineProperty(window, 'localStorage', {
+     value: mockLocalStorage
+});
+
+// TODO: fetch, console
+// 3. Mock destructured imports(one by test) // src/__tests__/mockImports/test2
+
+
+// TODO: react-testing-library cases
+// @testing-library/react:
+// next iteration for hooks
+// by queryByText is better for await than findByText
+// test hooks with async operations
+// queryByText doesn't get the button when text is 3 levels down -> issue ¿?
